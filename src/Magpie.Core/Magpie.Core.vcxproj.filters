@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Capture">
+      <UniqueIdentifier>{a3c5f48a-b77b-4e7d-ab18-74308a1c0889}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Overlay">
+      <UniqueIdentifier>{a50e8e49-7ac6-4977-98d8-013e82a19dad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextureLoader">
+      <UniqueIdentifier>{b0bbac79-0e76-436d-bcaa-b725b62d545f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Include">
+      <UniqueIdentifier>{7ed1757c-3140-42a7-93b3-5bf0171cfa7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{34fd6af4-f461-43ae-81e0-c663a89c2d2a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="include\Magpie.Core.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="MagOptions.h" />
+    <ClInclude Include="MagRuntime.h" />
+    <ClInclude Include="CursorManager.h" />
+    <ClInclude Include="DeviceResources.h" />
+    <ClInclude Include="EffectCacheManager.h" />
+    <ClInclude Include="EffectCompiler.h" />
+    <ClInclude Include="EffectDesc.h" />
+    <ClInclude Include="EffectDrawer.h" />
+    <ClInclude Include="ExclModeHack.h" />
+    <ClInclude Include="GPUTimer.h" />
+    <ClInclude Include="MagApp.h" />
+    <ClInclude Include="Renderer.h" />
+    <ClInclude Include="DesktopDuplicationFrameSource.h">
+      <Filter>Capture</Filter>
+    </ClInclude>
+    <ClInclude Include="DwmSharedSurfaceFrameSource.h">
+      <Filter>Capture</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsCaptureFrameSource.h">
+      <Filter>Capture</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameSourceBase.h">
+      <Filter>Capture</Filter>
+    </ClInclude>
+    <ClInclude Include="GDIFrameSource.h">
+      <Filter>Capture</Filter>
+    </ClInclude>
+    <ClInclude Include="OverlayDrawer.h">
+      <Filter>Overlay</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiBackend.h">
+      <Filter>Overlay</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiImpl.h">
+      <Filter>Overlay</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureLoader.h">
+      <Filter>TextureLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="DDS.h">
+      <Filter>TextureLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="DDSLoderHelpers.h">
+      <Filter>TextureLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectXHelper.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="LoggerHelper.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowHelper.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="ExportHelper.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectHelper.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiHelper.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiFontsCacheManager.h">
+      <Filter>Overlay</Filter>
+    </ClInclude>
+    <ClInclude Include="YasHelper.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MagRuntime.cpp" />
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="DllMain.cpp" />
+    <ClCompile Include="CursorManager.cpp" />
+    <ClCompile Include="DeviceResources.cpp" />
+    <ClCompile Include="EffectCacheManager.cpp" />
+    <ClCompile Include="EffectCompiler.cpp" />
+    <ClCompile Include="EffectDrawer.cpp" />
+    <ClCompile Include="ExclModeHack.cpp" />
+    <ClCompile Include="GPUTimer.cpp" />
+    <ClCompile Include="MagApp.cpp" />
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="DesktopDuplicationFrameSource.cpp">
+      <Filter>Capture</Filter>
+    </ClCompile>
+    <ClCompile Include="DwmSharedSurfaceFrameSource.cpp">
+      <Filter>Capture</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsCaptureFrameSource.cpp">
+      <Filter>Capture</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameSourceBase.cpp">
+      <Filter>Capture</Filter>
+    </ClCompile>
+    <ClCompile Include="GDIFrameSource.cpp">
+      <Filter>Capture</Filter>
+    </ClCompile>
+    <ClCompile Include="OverlayDrawer.cpp">
+      <Filter>Overlay</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuiBackend.cpp">
+      <Filter>Overlay</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuiImpl.cpp">
+      <Filter>Overlay</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureLoader.cpp">
+      <Filter>TextureLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="LoggerHelper.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectXHelper.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowHelper.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuiHelper.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuiFontsCacheManager.cpp">
+      <Filter>Overlay</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Magpie.Core.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="conanfile.txt" />
+  </ItemGroup>
+</Project>

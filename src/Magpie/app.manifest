@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1"
+          xmlns:asmv3="urn:schemas-microsoft-com:asm.v3"
+          manifestVersion="1.0">
+  <asmv3:file name="Magpie.App.dll" xmlns="urn:schemas-microsoft-com:winrt.v1">
+    <activatableClass name="Magpie.App.App"
+                      threadingModel="both" />
+    <activatableClass name="Magpie.App.MainPage"
+                      threadingModel="both" />
+    <activatableClass name="Magpie.App.LoggerHelper"
+                      threadingModel="both" />
+  </asmv3:file>
+  
+  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+    <application>
+      <!-- 多个 maxversiontested 是必要的，应跟随 Windows 的版本更新添加新条目，以利用最新功能 -->
+      <!-- XAML Islands 需要 -->
+      <maxversiontested Id="10.0.18362.0"/>
+      <!-- 在 Win11 中启用 Segoe UI Variable -->
+      <maxversiontested Id="10.0.22000.0"/>
+      <maxversiontested Id="10.0.22621.0"/>
+      <supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}" />
+    </application>
+  </compatibility>
+  
+  <!-- Indicates that the application is DPI-aware and will not be automatically scaled by Windows at higher DPIs. -->
+  <application xmlns="urn:schemas-microsoft-com:asm.v3">
+    <windowsSettings>
+      <!-- 使程序可以枚举到沉浸式窗口（immersive windows），如很多类名为 “Windows.UI.Core.CoreWindow” 的系统窗口 -->
+      <disableWindowFiltering xmlns="http://schemas.microsoft.com/SMI/2011/WindowsSettings">true</disableWindowFiltering>
+      <dpiAwareness xmlns="http://schemas.microsoft.com/SMI/2016/WindowsSettings">PerMonitorV2</dpiAwareness>
+      <heapType xmlns="http://schemas.microsoft.com/SMI/2020/WindowsSettings">SegmentHeap</heapType>
+    </windowsSettings>
+  </application>
+  
+  <!-- Enable themes for Windows common controls and dialogs (Windows XP and later) -->
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity type="win32"
+                        name="Microsoft.Windows.Common-Controls"
+                        version="6.0.0.0"
+                        processorArchitecture="*"
+                        publicKeyToken="6595b64144ccf1df"
+                        language="*" />
+    </dependentAssembly>
+  </dependency>
+</assembly>

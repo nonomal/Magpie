@@ -1,0 +1,13 @@
+namespace Magpie.App {
+	[Windows.UI.Xaml.Markup.ContentProperty("RawTitle")]
+	runtimeclass SettingsCard : Windows.UI.Xaml.Controls.UserControl, Windows.UI.Xaml.Data.INotifyPropertyChanged
+	{
+		SettingsCard();
+		
+		Object RawTitle;
+		String Title;
+		Object Description;
+		Object Icon;
+		Object ActionContent;
+	}
+}

@@ -1,0 +1,183 @@
+<Page x:Class="Magpie.App.SettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="using:Magpie.App"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+      mc:Ignorable="d">
+	<local:PageFrame x:Name="SettingsPageFrame">
+		<StackPanel HorizontalAlignment="Stretch"
+		            ChildrenTransitions="{StaticResource SettingsCardsAnimations}"
+		            Orientation="Vertical">
+			<local:SettingsGroup x:Uid="Settings_General"
+			                     Margin="0,-24,0,0">
+				<StackPanel Orientation="Vertical">
+					<local:SettingsCard x:Uid="Settings_General_Language">
+						<local:SettingsCard.Icon>
+							<FontIcon Glyph="&#xE8C1;" />
+						</local:SettingsCard.Icon>
+						<local:SettingsCard.ActionContent>
+							<ComboBox DropDownOpened="ComboBox_DropDownOpened"
+							          ItemsSource="{x:Bind ViewModel.Languages, Mode=OneTime}"
+							          SelectedIndex="{x:Bind ViewModel.Language, Mode=TwoWay}"
+							          Style="{StaticResource ComboBoxSettingStyle}" />
+						</local:SettingsCard.ActionContent>
+					</local:SettingsCard>
+					<muxc:InfoBar x:Uid="Settings_General_RequireRestart"
+					              Margin="0,2,0,0"
+					              IsClosable="False"
+					              IsOpen="True"
+					              Severity="Warning"
+					              Visibility="{x:Bind ViewModel.RequireRestart, Mode=OneWay}">
+						<muxc:InfoBar.ActionButton>
+							<Button x:Uid="Settings_General_RequireRestart_ActionButton"
+							        HorizontalAlignment="Right"
+							        Click="{x:Bind ViewModel.Restart}" />
+						</muxc:InfoBar.ActionButton>
+					</muxc:InfoBar>
+				</StackPanel>
+				<local:SettingsCard x:Uid="Settings_General_Theme">
+					<local:SettingsCard.Icon>
+						<FontIcon Glyph="&#xEF1F;" />
+					</local:SettingsCard.Icon>
+					<local:SettingsCard.ActionContent>
+						<ComboBox DropDownOpened="ComboBox_DropDownOpened"
+						          SelectedIndex="{x:Bind ViewModel.Theme, Mode=TwoWay}"
+						          Style="{StaticResource ComboBoxSettingStyle}">
+							<ComboBoxItem x:Uid="Settings_General_Theme_System" />
+							<ComboBoxItem x:Uid="Settings_General_Theme_Light" />
+							<ComboBoxItem x:Uid="Settings_General_Theme_Dark" />
+						</ComboBox>
+					</local:SettingsCard.ActionContent>
+				</local:SettingsCard>
+				<local:SettingsCard x:Uid="Settings_General_PortableMode">
+					<local:SettingsCard.Icon>
+						<FontIcon Glyph="&#xE88E;" />
+					</local:SettingsCard.Icon>
+					<local:SettingsCard.Description>
+						<HyperlinkButton x:Uid="Settings_General_PortableMode_Locate"
+						                 Click="{x:Bind ViewModel.OpenConfigLocation}" />
+					</local:SettingsCard.Description>
+					<local:SettingsCard.ActionContent>
+						<ToggleSwitch x:Uid="ToggleSwitch"
+						              IsOn="{x:Bind ViewModel.IsPortableMode, Mode=TwoWay}" />
+					</local:SettingsCard.ActionContent>
+				</local:SettingsCard>
+				<local:SettingsCard x:Uid="Settings_General_ShowTrayIcon">
+					<local:SettingsCard.Icon>
+						<FontIcon Glyph="&#xE9F5;" />
+					</local:SettingsCard.Icon>
+					<local:SettingsCard.ActionContent>
+						<ToggleSwitch x:Uid="ToggleSwitch"
+						              IsOn="{x:Bind ViewModel.IsShowTrayIcon, Mode=TwoWay}" />
+					</local:SettingsCard.ActionContent>
+				</local:SettingsCard>
+			</local:SettingsGroup>
+			<local:SettingsGroup x:Uid="Settings_Launch">
+				<muxc:Expander HorizontalAlignment="Stretch"
+				               HorizontalContentAlignment="Stretch"
+				               IsExpanded="{x:Bind ViewModel.IsRunAtStartup, Mode=OneWay}"
+				               Style="{StaticResource SettingExpanderStyle}">
+					<muxc:Expander.Header>
+						<local:SettingsCard x:Uid="Settings_Launch_RunAtStartup"
+						                    Style="{StaticResource ExpanderHeaderSettingStyle}">
+							<local:SettingsCard.Icon>
+								<FontIcon Glyph="&#xE7B5;" />
+							</local:SettingsCard.Icon>
+							<local:SettingsCard.ActionContent>
+								<ToggleSwitch x:Uid="ToggleSwitch"
+								              IsOn="{x:Bind ViewModel.IsRunAtStartup, Mode=TwoWay}" />
+							</local:SettingsCard.ActionContent>
+						</local:SettingsCard>
+					</muxc:Expander.Header>
+					<muxc:Expander.Content>
+						<local:SettingsCard x:Uid="Settings_Launch_RunAtStartup_MinimizeAtStartup"
+						                    IsEnabled="{x:Bind ViewModel.IsMinimizeAtStartupEnabled, Mode=OneWay}"
+						                    Style="{StaticResource ExpanderContentSettingStyle}">
+							<local:SettingsCard.ActionContent>
+								<ToggleSwitch x:Uid="ToggleSwitch"
+								              IsOn="{x:Bind ViewModel.IsMinimizeAtStartup, Mode=TwoWay}" />
+							</local:SettingsCard.ActionContent>
+						</local:SettingsCard>
+					</muxc:Expander.Content>
+				</muxc:Expander>
+				<local:SettingsCard x:Uid="Settings_Launch_AlwaysRunAsAdmin"
+				                    IsEnabled="{x:Bind ViewModel.IsProcessElevated, Mode=OneTime}">
+					<local:SettingsCard.Icon>
+						<FontIcon Glyph="&#xE7EF;" />
+					</local:SettingsCard.Icon>
+					<local:SettingsCard.ActionContent>
+						<ToggleSwitch x:Uid="ToggleSwitch"
+						              IsOn="{x:Bind ViewModel.IsAlwaysRunAsAdmin, Mode=TwoWay}" />
+					</local:SettingsCard.ActionContent>
+				</local:SettingsCard>
+			</local:SettingsGroup>
+			<local:SettingsGroup x:Uid="Settings_Advanced">
+				<local:SettingsCard x:Uid="Settings_Advanced_AllowScalingMaximized">
+					<local:SettingsCard.Icon>
+						<FontIcon Glyph="&#xE740;" />
+					</local:SettingsCard.Icon>
+					<local:SettingsCard.ActionContent>
+						<ToggleSwitch x:Uid="ToggleSwitch"
+						              IsOn="{x:Bind ViewModel.IsAllowScalingMaximized, Mode=TwoWay}" />
+					</local:SettingsCard.ActionContent>
+				</local:SettingsCard>
+				<local:SettingsCard x:Uid="Settings_Advanced_SimulateExclusiveFullscreen">
+					<local:SettingsCard.Icon>
+						<FontIcon Glyph="&#xec46;" />
+					</local:SettingsCard.Icon>
+					<local:SettingsCard.ActionContent>
+						<ToggleSwitch x:Uid="ToggleSwitch"
+						              IsOn="{x:Bind ViewModel.IsSimulateExclusiveFullscreen, Mode=TwoWay}" />
+					</local:SettingsCard.ActionContent>
+				</local:SettingsCard>
+				<local:SettingsCard x:Uid="Settings_Advanced_InlineParams">
+					<local:SettingsCard.Icon>
+						<FontIcon Glyph="&#xE9E9;" />
+					</local:SettingsCard.Icon>
+					<local:SettingsCard.ActionContent>
+						<ToggleSwitch x:Uid="ToggleSwitch"
+						              IsOn="{x:Bind ViewModel.IsInlineParams, Mode=TwoWay}" />
+					</local:SettingsCard.ActionContent>
+				</local:SettingsCard>
+				<muxc:Expander HorizontalAlignment="Stretch"
+				               HorizontalContentAlignment="Stretch"
+				               Style="{StaticResource SettingExpanderStyle}">
+					<muxc:Expander.Header>
+						<local:SettingsCard x:Uid="Settings_DeveloperOptions"
+						                    Style="{StaticResource ExpanderHeaderSettingStyle}">
+							<local:SettingsCard.Icon>
+								<FontIcon Glyph="&#xEC7A;" />
+							</local:SettingsCard.Icon>
+						</local:SettingsCard>
+					</muxc:Expander.Header>
+					<muxc:Expander.Content>
+						<StackPanel>
+							<local:SettingsCard Style="{StaticResource ExpanderContentSettingStyle}">
+								<CheckBox x:Uid="Settings_DeveloperOptions_DebugMode"
+								          IsChecked="{x:Bind ViewModel.IsDebugMode, Mode=TwoWay}" />
+							</local:SettingsCard>
+							<local:SettingsCard Style="{StaticResource ExpanderContentSettingStyle}">
+								<CheckBox x:Uid="Settings_DeveloperOptions_DisableEffectCache"
+								          IsChecked="{x:Bind ViewModel.IsDisableEffectCache, Mode=TwoWay}" />
+							</local:SettingsCard>
+							<local:SettingsCard Style="{StaticResource ExpanderContentSettingStyle}">
+								<CheckBox x:Uid="Settings_DeveloperOptions_DisableFontCache"
+								          IsChecked="{x:Bind ViewModel.IsDisableFontCache, Mode=TwoWay}" />
+							</local:SettingsCard>
+							<local:SettingsCard Style="{StaticResource ExpanderContentSettingStyle}">
+								<CheckBox x:Uid="Settings_DeveloperOptions_SaveEffectSources"
+								          IsChecked="{x:Bind ViewModel.IsSaveEffectSources, Mode=TwoWay}" />
+							</local:SettingsCard>
+							<local:SettingsCard Style="{StaticResource ExpanderContentSettingStyle}">
+								<CheckBox x:Uid="Settings_DeveloperOptions_WarningsAreErrors"
+								          IsChecked="{x:Bind ViewModel.IsWarningsAreErrors, Mode=TwoWay}" />
+							</local:SettingsCard>
+						</StackPanel>
+					</muxc:Expander.Content>
+				</muxc:Expander>
+			</local:SettingsGroup>
+		</StackPanel>
+	</local:PageFrame>
+</Page>
