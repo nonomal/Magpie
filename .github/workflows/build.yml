@@ -2,52 +2,42 @@ name: build
 
 on:
   push:
-    paths-ignore: [ 'docs/**', 'img/**', 'tools/**' ]
+    paths: [ '.github/workflows/build.yml', 'Magpie.sln', '*.props', 'publish.py', 'src/**' ]
   pull_request:
-    paths-ignore: [ 'docs/**', 'img/**', 'tools/**' ]
-
-env:
-  # Configuration type to build.
-  # You can convert this to a build matrix if you need coverage of multiple configuration types.
-  # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
-  BUILD_CONFIGURATION: Release
+    paths: [ '.github/workflows/build.yml', 'Magpie.sln', '*.props', 'publish.py', 'src/**' ]
 
 jobs:
   build:
-    runs-on: windows-2022
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        platform: ["x64", "ARM64"]
 
     steps:
-    - uses: actions/checkout@v2.4.0
+    - uses: actions/checkout@v4
 
-    - name: Load Conan cache
-      uses: actions/cache@v2
+    - uses: actions/setup-python@v5
       with:
-        path: ./.conan/data
-        key: ${{ runner.os }}-conan-${{ hashFiles('**/conanfile.txt') }}
-    
-    - name: Restore NuGet packages
-      run: nuget restore
-    
+        python-version: '3.11'
+
     - name: Setup Conan
       run: pip install conan
 
-    - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1.1
+    - name: Load Conan cache
+      uses: actions/cache@v4
       with:
-        vs-prerelease: true
-
-    - name: Conan Install
-      run: msbuild /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=x64 ./CONAN_INSTALL
-
-    - name: Publish
-      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=x64 ./DEPLOY
+        path: ~/.conan2/p
+        key: Conan-${{ hashFiles('src/**/conanfile.txt') }}-${{ matrix.platform }}
+    
+    - name: Build
+      run: python publish.py ${{ matrix.platform }} unpackaged certs\Magpie.pfx "${{ secrets.MAGPIE_PFX_PASSWORD }}"
 
     - name: Save hash
-      id: vars
-      run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+      id: hash
+      run: echo "sha_short=$(git rev-parse --short HEAD)" >> $env:GITHUB_OUTPUT
 
     - name: Store build
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with: 
-          name: Magpie_dev_${{ steps.vars.outputs.sha_short }}
-          path: ./publish/
+          name: Magpie-dev-${{ steps.hash.outputs.sha_short }}-${{ matrix.platform }}
+          path: ./publish/${{ matrix.platform }}
